@@ -16,14 +16,14 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // static assets
-app.use(express.static('public'));
+app.use(express.static('Develop/public'));
 
 
 // ROUTES
 // html routes - deliver pages
 // GET/ -the home page
 app.get('/', (req, res) => 
-    res.sendFile(path.join(__dirname, 'public/index.html'))
+    res.sendFile(path.join(__dirname, 'Develop/public/index.html'))
 );
 
 // api routes - deliver data
@@ -34,9 +34,11 @@ res.json([
         
 }]));
 
+
+
 //404 route
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public/404.html'))
+    res.sendFile(path.join(__dirname, 'Develop/public/404.html'))
 
 })
 
