@@ -19,9 +19,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('Develop/public'));
 
 
-// ROUTES
+
 // html routes - deliver pages
 // GET/ -the home page
+
+app.get('/', (request, response) => response.send('this is the homepage'));
 
 // app.get('/', (request, response) => 
 //     response.send(path.join(__dirname, 'Develop/public/index.html'))
@@ -29,7 +31,7 @@ app.use(express.static('Develop/public'));
 
 
 
-
+// ROUTES
 // GET/ -notes html
 app.get('/notes', (request, response) => 
     response.sendFile(path.join(__dirname, 'Develop/public/notes.html'))
