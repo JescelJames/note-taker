@@ -22,13 +22,13 @@ app.use(express.static('Develop/public'));
 // ROUTES
 // html routes - deliver pages
 // GET/ -the home page
-app.get('/', (req, res) => 
-    res.sendFile(path.join(__dirname, 'Develop/public/index.html'))
+app.get('/', (request, response) => 
+    response.sendFile(path.join(__dirname, 'Develop/public/index.html'))
 );
 
 // api routes - deliver data
-app.get('/api/todos', (req,res) => 
-res.json([
+app.get('/api/todos', (request,response) => 
+response.json([
     {
         title: "buy milk",
         
@@ -37,8 +37,8 @@ res.json([
 
 
 //404 route
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Develop/public/404.html'))
+app.get('*', (request, response) => {
+    response.sendFile(path.join(__dirname, 'Develop/public/404.html'))
 
 })
 
