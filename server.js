@@ -22,17 +22,29 @@ app.use(express.static('Develop/public'));
 // ROUTES
 // html routes - deliver pages
 // GET/ -the home page
-app.get('/', (request, response) => 
-    response.sendFile(path.join(__dirname, 'Develop/public/index.html'))
+
+// app.get('/', (request, response) => 
+//     response.send(path.join(__dirname, 'Develop/public/index.html'))
+// );
+
+
+
+
+// GET/ -notes html
+app.get('/notes', (request, response) => 
+    response.sendFile(path.join(__dirname, 'Develop/public/notes.html'))
 );
 
 // api routes - deliver data
-app.get('/api/todos', (request,response) => 
-response.json([
-    {
-        title: "buy milk",
+// app.get('/api/todos', (request,response) => 
+// response.json([
+//     {
+//         title: "buy milk",
         
-}]));
+//     }
+// ])
+
+// );
 
 
 
@@ -40,7 +52,7 @@ response.json([
 app.get('*', (request, response) => {
     response.sendFile(path.join(__dirname, 'Develop/public/404.html'))
 
-})
+});
 
 
 // START SERVER
