@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3000;
 // MIDDLEWARES
 
 // static assets
-app.use(express.static('Develop/public'));
+app.use(express.static('public'));
 
 
 // stuff to get the req.body
@@ -40,12 +40,12 @@ app.get('/api/', (request, response) => response.json(db));
 
 
 
+
+
 //404 route
 app.get('*', (request, response) => {
     response.sendFile(path.join(__dirname, 'Develop/public/404.html'))
-
 });
-
 
 // START SERVER
 app.listen(PORT, () => console.log(`Server live at http://localhost:${PORT}` ));
