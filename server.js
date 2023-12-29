@@ -2,51 +2,41 @@
 // express
 const express = require('express');
 const path =  require('path');
+const db = require('./Develop/db/db.json');
+console.log(db);
 
 
 // DATA
 
+
 // APP / PORT
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 
 // MIDDLEWARES
-// stuff to get the req.body
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
 // static assets
 app.use(express.static('Develop/public'));
 
 
-
-// html routes - deliver pages
-// GET/ -the home page
-
-app.get('/', (request, response) => response.send('this is the homepage'));
-
-// app.get('/', (request, response) => 
-//     response.send(path.join(__dirname, 'Develop/public/index.html'))
-// );
+// stuff to get the req.body
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 
 
 
 // ROUTES
-// GET/ -notes html
+// app.get('/', (request, response) => response.send('This is the homepage http://localhost:3001'));
+
+// GET/ HTML Routes
 app.get('/notes', (request, response) => 
     response.sendFile(path.join(__dirname, 'Develop/public/notes.html'))
 );
 
-// api routes - deliver data
-// app.get('/api/todos', (request,response) => 
-// response.json([
-//     {
-//         title: "buy milk",
-        
-//     }
-// ])
 
-// );
+// GET/ API Routes
+app.get('/api/', (request, response) => response.json(db));
 
 
 
@@ -58,4 +48,4 @@ app.get('*', (request, response) => {
 
 
 // START SERVER
-app.listen(PORT, () => console.log(`Server life on port ${PORT}` ));
+app.listen(PORT, () => console.log(`Server live at http://localhost:${PORT}` ));
