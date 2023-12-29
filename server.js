@@ -2,7 +2,7 @@
 // express
 const express = require('express');
 const path =  require('path');
-const db = require('./Develop/db/db.json');
+const db = require('./db/db.json');
 console.log(db);
 
 
@@ -31,7 +31,7 @@ app.use(express.static('public'));
 
 // GET/ HTML Routes
 app.get('/notes', (request, response) => 
-    response.sendFile(path.join(__dirname, 'Develop/public/notes.html'))
+    response.sendFile(path.join(__dirname, 'public/notes.html'))
 );
 
 
@@ -44,7 +44,7 @@ app.get('/api/', (request, response) => response.json(db));
 
 //404 route
 app.get('*', (request, response) => {
-    response.sendFile(path.join(__dirname, 'Develop/public/404.html'))
+    response.sendFile(path.join(__dirname, 'public/404.html'))
 });
 
 // START SERVER
