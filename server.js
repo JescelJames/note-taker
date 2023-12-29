@@ -36,7 +36,7 @@ app.get('/notes', (request, response) =>
 
 
 // GET/ API Routes
-app.get('/api/', (request, response) => response.json(db));
+app.get('/api/notes', (request, response) => response.json(db));
 
 
 
