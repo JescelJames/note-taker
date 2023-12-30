@@ -28,25 +28,45 @@
 // ROUTES ____________________________________________________
 
     // GET - index homepage --------------------------------
-        app.get('/', (req, res) => res.send('This is the homepage http://localhost:3001'));
-
-
-    // GET - notes.html -------------------------------------
-        app.get('/notes', (req, res) => 
-            response.sendFile(path.join(__dirname, 'public/notes.html'))
-        );
-
-
-    // GET - api notes  -------------------------------------
-        app.get('/api/notes', (req, res) => res.json(db));
-
-
-    // POST -     
-        app.post('/api/notes', (req, res) => {
-            // Handle saving the new note
+        app.get('/', (req, res) => { 
+            return res.send('This is the homepage http://localhost:3000')
         });
 
 
+    // GET - notes.html -------------------------------------
+        app.get('/notes', (req, res) => {
+            res.sendFile(path.join(__dirname, 'public/notes.html'))
+            
+        });
+
+
+
+    // GET - api notes  -------------------------------------
+
+        app.get('/api/notes', (req, res) => {
+
+            // Log our request to the terminal
+            console.info(`${req.method} request received in terminal. jcv`);
+
+            // // Show the user agent information in the terminal
+            // console.info(req.rawHeaders);
+
+            return res.json(db);
+        });
+
+        // app.get('/api/terms', (req, res) => res.json(termData));
+
+    // POST -     
+        app.post('/api/notes', (req, res) => { 
+            console.info(`${req.method} request received in terminal. jcv`)
+            return res.json(db)
+        });
+
+
+
+
+
+        
     // GET - fallback route ---------------------------------
         app.get('*', (req, res) => {
             res.sendFile(path.join(__dirname, 'public/404.html'))
