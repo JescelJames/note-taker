@@ -31,17 +31,16 @@
 // ROUTES ____________________________________________________
 
     // GET - index homepage --------------------------------
+
         app.get('/', (req, res) => { 
             return res.sendFile(path.join(__dirname, '/public/index.html'))
         });
 
-
     // GET - notes.html -------------------------------------
+
         app.get('/notes', (req, res) => {
             res.sendFile(path.join(__dirname, 'public/notes.html'))
-            
         });
-
 
     // GET - api notes  -------------------------------------
 
@@ -55,10 +54,29 @@
                 }
             });
         });
+
+
+    // GET - api note by id  ----------------------------------
+        app.get('/api/notes/:id', (req, res) => {
+            const noteId = req.params.id;
+            fs.readFile('./db/db.json', 'utf8', (err, data) => {
+                if (err) {
+                    console.error(err);
+                    res.status(500).json('Error reading data');
+                } else {
+                    const notes = JSON.parse(data);
+                    const note = notes.find(n => n.id === noteId);
+                    if (note) {
+                        res.json(note);
+                    } else {
+                        res.status(404).json('Note not found');
+                    }
+                }
+            });
+        });
+    
         
-
-
-    // POST -  to add notes --------------------------------
+    // POST -  To add notes --------------------------------
 
         app.post('/api/notes', (req, res) => {
             // Log that a POST request was received
@@ -114,7 +132,6 @@
         });
         
 
-
     // GET - Fallback Route ---------------------------------
         app.get('*', (req, res) => {
             res.sendFile(path.join(__dirname, 'public/404.html'))
@@ -124,3 +141,5 @@
 // START SERVER ______________________________________________
 
     app.listen(PORT, () => console.log(`Server live at http://localhost:${PORT}` ));
+
+//_____________________________________________________________

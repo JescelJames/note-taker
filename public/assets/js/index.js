@@ -61,6 +61,14 @@
       }
     });
 
+  //**** Added new function to fetch a single note by it's ID.  
+    const getNote = (id) =>
+      fetch(`/api/notes/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
 
 
   const renderActiveNote = () => {
@@ -115,11 +123,23 @@
 
 
   // Sets the activeNote and displays it
+  // const handleNoteView = (e) => {
+  //   e.preventDefault();
+  //   activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+  //   renderActiveNote();
+  // };
+
+  //**** Update the handleNoteView function to fetch the note details when a note is clicked and then display it:
   const handleNoteView = (e) => {
     e.preventDefault();
-    activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
-    renderActiveNote();
+    const noteId = e.target.parentElement.getAttribute('data-note-id');
+    getNote(noteId).then(response => response.json()).then(note => {
+        activeNote = note;
+        renderActiveNote();
+        show(newNoteBtn);
+    });
   };
+
 
 
   // Sets the activeNote to and empty object and allows the user to enter a new note
@@ -156,6 +176,9 @@
     const createLi = (text, delBtn = true) => {
       const liEl = document.createElement('li');
       liEl.classList.add('list-group-item');
+      
+      //***** Modify createLi Ensure that each list item (li) has the correct data-note-id:
+      // liEl.setAttribute('data-note-id', note.id);
 
       const spanEl = document.createElement('span');
       spanEl.classList.add('list-item-title');
