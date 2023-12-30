@@ -57,6 +57,7 @@
 
 
     // GET - api note by id  ----------------------------------
+
         app.get('/api/notes/:id', (req, res) => {
             const noteId = req.params.id;
             fs.readFile('./db/db.json', 'utf8', (err, data) => {
@@ -91,7 +92,7 @@
                 const newNotes = {
                     title,
                     text,
-                    note_id: uuid(),
+                    id: uuid(),
                 };
         
                 // TO READ AND WRITE TO db.json
