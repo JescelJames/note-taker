@@ -8,7 +8,6 @@
     const uuid = require('./helpers/uuid');
     
 
-
 // DATA ___________________________________________________
     //
 
@@ -60,18 +59,30 @@
 
         app.get('/api/notes/:id', (req, res) => {
             const noteId = req.params.id;
+
             fs.readFile('./db/db.json', 'utf8', (err, data) => {
                 if (err) {
                     console.error(err);
                     res.status(500).json('Error reading data');
-                } else {
-                    const notes = JSON.parse(data);
-                    const note = notes.find(n => n.id === noteId);
-                    if (note) {
-                        res.json(note);
-                    } else {
-                        res.status(404).json('Note not found');
-                    }
+                } 
+                else {
+                    // const notes = JSON.parse(data);
+                        // Iterate through the terms name to check if it matches `req.params.id`
+                        for (let i = 0; i < db.length; i++) {
+                            if (noteId === db[i].id) {
+                            return res.json(db[i]);
+                            }
+                        }        
+                        // Return a message if the term doesn't exist in our DB
+                        return res.json('No match found');
+
+
+                    // const note = notes.find(n => n.id === noteId);
+                    // if (note) {
+                    //     res.json(note);
+                    // } else {
+                    //     res.status(404).json('Note not found');
+                    // }
                 }
             });
         });
@@ -87,7 +98,8 @@
                 const { title, text } = req.body;
         
             // If all the required properties are present
-            if (title && text) {
+            // if (title && text) {
+                if (title || text) {    
                 // Variable for the object we will save
                 const newNotes = {
                     title,
@@ -117,7 +129,6 @@
                                     `Review for ${newNotes.title} has been written to JSON file`
                                     )
                             );
-            
                     })
 
                 const response = {

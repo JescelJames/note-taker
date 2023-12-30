@@ -1,5 +1,3 @@
-// const { text } = require("body-parser");
-
 // DEPENDENCIES ______________________________________________
   let noteForm;
   let noteTitle;
@@ -63,15 +61,7 @@
       }
     });
 
-  // //**** Added new function to fetch a single note by it's ID. 
 
-  //   const getNote = (id) =>
-  //     fetch(`/api/notes/${id}`, {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       }
-  //     });
 
 
   const renderActiveNote = () => {
@@ -132,17 +122,6 @@
       renderActiveNote();
     };
 
-  // //**** Update the handleNoteView function to fetch the note details when a note is clicked and then display it:
-
-  //   const handleNoteView = (e) => {
-  //     e.preventDefault();
-  //     const noteId = e.target.parentElement.getAttribute('data-note-id');
-  //     getNote(noteId).then(response => response.json()).then(note => {
-  //         activeNote = note;
-  //         renderActiveNote();
-  //         show(newNoteBtn);
-  //     });
-  //   };
 
 
 
@@ -176,11 +155,6 @@
 
     let noteListItems = [];
 
-    // //****
-    //   jsonNotes.forEach((note) => {
-    //     const li = createLi(note);
-    //     noteListItems.push(li);
-    //   });
 
 
     // Returns HTML element with or without a delete button
@@ -188,8 +162,7 @@
       const liEl = document.createElement('li');
       liEl.classList.add('list-group-item');
       
-      // //***** Modify createLi Ensure that each list item (li) has the correct data-note-id:
-      //   liEl.setAttribute('data-note-id', text.id);
+
 
       const spanEl = document.createElement('span');
       spanEl.classList.add('list-item-title');
