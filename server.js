@@ -29,9 +29,9 @@
 // ROUTES ____________________________________________________
 
     // GET - index homepage --------------------------------
-        // app.get('/', (req, res) => { 
-        //     return res.send('This is the homepage http://localhost:3000')
-        // });
+        app.get('/', (req, res) => { 
+            return res.sendFile(path.join(__dirname, '/public/index.html'))
+        });
 
 
     // GET - notes.html -------------------------------------
@@ -42,17 +42,6 @@
 
 
     // GET - api notes  -------------------------------------
-
-        // app.get('/api/notes', (req, res) => {
-
-        //     // Log our request to the terminal
-        //     console.info(`${req.method} request received in terminal. jcv`);
-
-          
-        //     // Sending all db to the client
-        //     return res.json(db);
-
-        // });
 
         app.get('/api/notes', (req, res) => {
             fs.readFile('./db/db.json', 'utf8', (err, data) => {
@@ -66,9 +55,8 @@
         });
         
 
-        // app.get('/api/terms', (req, res) => res.json(termData));
 
-    // POST to add notes ---------------------------------------------
+    // POST -  to add notes ---------------------------------------------
 
     app.post('/api/notes', (req, res) => {
         // Log that a POST request was received
@@ -86,7 +74,8 @@
             // review_id: uuid(),
           };
     
-          // PSUEDOCODE
+          // TO READ AND WRITE TO db.json
+
             //1. Read the reviews.json and parse the data
               fs.readFile('./db/db.json', 'utf-8', (err, data) => {
                 const notes = JSON.parse(data);
@@ -124,49 +113,6 @@
         }
       });
 
-    // // POST request to add notes ------------------------
-   
-    //     app.post('/api/notes', (req, res) => { 
-    //         console.info(`${req.method} request received in terminal. jcv`);
-        
-    //         const { title, text } = req.body;
-            
-    //         if (title && text) {
-    //             const newNote = { title, text };
-        
-    //             fs.readFile('./db/db.json', 'utf8', (err, data) => {
-    //                 if (err) {
-    //                     console.error(err);
-    //                     return res.status(500).json('Error reading data');
-    //                 }
-        
-    //                 try {
-    //                     // Parse the data to an array and add the new note
-    //                     let notesArray = JSON.parse(data);
-    //                     if (!Array.isArray(notesArray)) {
-    //                         // If the data is not an array, initialize it as an array
-    //                         notesArray = [];
-    //                     }
-    //                     notesArray.push(newNote);
-        
-    //                     // Write the updated array back to db.json
-    //                     fs.writeFile('./db/db.json', JSON.stringify(notesArray, null, 2), (err) => {
-    //                         if (err) {
-    //                             console.error(err);
-    //                             return res.status(500).json('Error writing new note');
-    //                         }
-    //                         console.log(`Review for ${newNote.title} has been written to JSON file`);
-    //                         res.status(201).json({ status: 'success', body: newNote });
-    //                     });
-    //                 } catch (parseError) {
-    //                     console.error(parseError);
-    //                     res.status(500).json('Error parsing data');
-    //                 }
-    //             });
-    //         } else {
-    //             res.status(400).json('Title and text are required');
-    //         }
-    //     });
     
 
 
