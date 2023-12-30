@@ -63,7 +63,6 @@
 
 
 
-
   const renderActiveNote = () => {
     hide(saveNoteBtn);
     hide(clearBtn);
@@ -116,13 +115,11 @@
 
 
   // Sets the activeNote and displays it
-    const handleNoteView = (e) => {
-      e.preventDefault();
-      activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
-      renderActiveNote();
-    };
-
-
+  const handleNoteView = (e) => {
+    e.preventDefault();
+    activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+    renderActiveNote();
+  };
 
 
   // Sets the activeNote to and empty object and allows the user to enter a new note
@@ -155,14 +152,10 @@
 
     let noteListItems = [];
 
-
-
     // Returns HTML element with or without a delete button
     const createLi = (text, delBtn = true) => {
       const liEl = document.createElement('li');
       liEl.classList.add('list-group-item');
-      
-
 
       const spanEl = document.createElement('span');
       spanEl.classList.add('list-item-title');

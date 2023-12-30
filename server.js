@@ -4,8 +4,9 @@
     const path =  require('path');
     const db = require('./db/db.json');
     const fs = require('fs');
+    // Helper method for generating unique ids
+    const uuid = require('./helpers/uuid');
     
-
 
 // DATA ___________________________________________________
     //
@@ -28,31 +29,19 @@
 
 // ROUTES ____________________________________________________
 
-    // GET - index homepage --------------------------------
+    //GET - index homepage --------------------------------
+
         app.get('/', (req, res) => { 
-            return res.send('This is the homepage http://localhost:3000')
+            return res.sendFile(path.join(__dirname, '/public/index.html'))
         });
 
+    //GET - notes.html -------------------------------------
 
-    // GET - notes.html -------------------------------------
         app.get('/notes', (req, res) => {
             res.sendFile(path.join(__dirname, 'public/notes.html'))
-            
         });
 
-
-    // GET - api notes  -------------------------------------
-
-        // app.get('/api/notes', (req, res) => {
-
-        //     // Log our request to the terminal
-        //     console.info(`${req.method} request received in terminal. jcv`);
-
-          
-        //     // Sending all db to the client
-        //     return res.json(db);
-
-        // });
+    //GET - api notes  -------------------------------------
 
         app.get('/api/notes', (req, res) => {
             fs.readFile('./db/db.json', 'utf8', (err, data) => {
@@ -64,92 +53,94 @@
                 }
             });
         });
-        
-
-        // app.get('/api/terms', (req, res) => res.json(termData));
 
 
+    //GET - api note by id  ----------------------------------
 
-    // POST request to add notes ------------------------
+        app.get('/api/notes/:id', (req, res) => {
+            const noteId = req.params.id;
 
-    // app.post('/api/notes', (req, res) => { 
-    //     console.info(`${req.method} request received in terminal. jcv`);
-    
-    //     const { title, text } = req.body;
-        
-    //     if (title && text) {
-    //         const newNote = { title, text };
-    
-    //         // Read the current contents of db.json
-    //         fs.readFile('./db/db.json', 'utf8', (err, data) => {
-    //             if (err) {
-    //                 console.error(err);
-    //                 res.status(500).json('Error reading data');
-    //             } else {
-    //                 // Parse the data to an array and add the new note
-    //                 const notesArray = JSON.parse(data);
-    //                 notesArray.push(newNote);
-    
-    //                 // Write the updated array back to db.json
-    //                 fs.writeFile('./db/db.json', JSON.stringify(notesArray, null, 2), (err) => {
-    //                     if (err) {
-    //                         console.error(err);
-    //                         res.status(500).json('Error writing new note');
-    //                     } else {
-    //                         console.log(`Review for ${newNote.title} has been written to JSON file`);
-    //                         res.status(201).json({ status: 'success', body: newNote });
-    //                     }
-    //                 });
-    //             }
-    //         });
-    //     } else {
-    //         res.status(400).json('Title and text are required');
-    //     }
-    // });
-    app.post('/api/notes', (req, res) => { 
-        console.info(`${req.method} request received in terminal. jcv`);
-    
-        const { title, text } = req.body;
-        
-        if (title && text) {
-            const newNote = { title, text };
-    
             fs.readFile('./db/db.json', 'utf8', (err, data) => {
                 if (err) {
                     console.error(err);
-                    return res.status(500).json('Error reading data');
-                }
-    
-                try {
-                    // Parse the data to an array and add the new note
-                    let notesArray = JSON.parse(data);
-                    if (!Array.isArray(notesArray)) {
-                        // If the data is not an array, initialize it as an array
-                        notesArray = [];
-                    }
-                    notesArray.push(newNote);
-    
-                    // Write the updated array back to db.json
-                    fs.writeFile('./db/db.json', JSON.stringify(notesArray, null, 2), (err) => {
-                        if (err) {
-                            console.error(err);
-                            return res.status(500).json('Error writing new note');
-                        }
-                        console.log(`Review for ${newNote.title} has been written to JSON file`);
-                        res.status(201).json({ status: 'success', body: newNote });
-                    });
-                } catch (parseError) {
-                    console.error(parseError);
-                    res.status(500).json('Error parsing data');
+                    res.status(500).json('Error reading data');
+                } 
+                else {
+                        // Iterate through the terms name to check if it matches `req.params.id`
+                            for (let i = 0; i < db.length; i++) {
+                                if (noteId === db[i].id) {
+                                return res.json(db[i]);
+                                }
+                            }        
+                        // Return a message if the term doesn't exist in our DB
+                            return res.json('No match found');
                 }
             });
-        } else {
-            res.status(400).json('Title and text are required');
-        }
-    });
+        });
     
+        
+    //POST -  To add notes --------------------------------
 
-    // GET - Fallback Route ---------------------------------
+        app.post('/api/notes', (req, res) => {
+            // Log that a POST request was received
+                console.info(`${req.method} request received to add a review`);
+        
+            // Destructuring assignment for the items in req.body
+                const { title, text } = req.body;
+        
+            // If all the required properties are present
+                // if (title && text) // && or || ?
+                if (title || text) {    
+                    // Variable for the object we will save
+                        const newNotes = {
+                            title,
+                            text,
+                            id: uuid(),
+                        };
+            
+                    // TO READ AND WRITE TO db.json
+
+                        //1. Read the reviews.json and parse the data
+                            fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+                                const notes = JSON.parse(data);
+                                
+                                // 2. add the new review to the list of reviews
+                                    notes.push(newNotes);
+                                    console.log(notes); 
+                                        
+                                // 3. stringify the list of reviews
+                                    const reviewNotes = JSON.stringify(notes, null, '\t');
+                        
+                                // 4. write the updated list to the reviews.json
+                        
+                                    fs.writeFile(`./db/db.json`, reviewNotes, (err) =>
+                                        err
+                                        ? console.error(err)
+                                        : console.log(
+                                            `Review for ${newNotes.title} has been written to JSON file`
+                                            )
+                                    );
+                            })
+                    
+                        // Terminal visuals 
+                            const response = {
+                                status: 'success',
+                                body: newNotes,
+                            };
+                            console.log(response);
+                            res.status(201).json(response);
+
+                } else {
+                res.status(500).json('Error in posting review');
+                }
+        });
+    
+        
+    //DELETE - delete note
+        //
+        
+
+    //GET - Fallback Route ---------------------------------
         app.get('*', (req, res) => {
             res.sendFile(path.join(__dirname, 'public/404.html'))
         });
@@ -158,3 +149,5 @@
 // START SERVER ______________________________________________
 
     app.listen(PORT, () => console.log(`Server live at http://localhost:${PORT}` ));
+
+//_____________________________________________________________
