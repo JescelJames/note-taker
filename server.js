@@ -29,19 +29,19 @@
 
 // ROUTES ____________________________________________________
 
-    // GET - index homepage --------------------------------
+    //GET - index homepage --------------------------------
 
         app.get('/', (req, res) => { 
             return res.sendFile(path.join(__dirname, '/public/index.html'))
         });
 
-    // GET - notes.html -------------------------------------
+    //GET - notes.html -------------------------------------
 
         app.get('/notes', (req, res) => {
             res.sendFile(path.join(__dirname, 'public/notes.html'))
         });
 
-    // GET - api notes  -------------------------------------
+    //GET - api notes  -------------------------------------
 
         app.get('/api/notes', (req, res) => {
             fs.readFile('./db/db.json', 'utf8', (err, data) => {
@@ -55,7 +55,7 @@
         });
 
 
-    // GET - api note by id  ----------------------------------
+    //GET - api note by id  ----------------------------------
 
         app.get('/api/notes/:id', (req, res) => {
             const noteId = req.params.id;
@@ -66,29 +66,20 @@
                     res.status(500).json('Error reading data');
                 } 
                 else {
-                    // const notes = JSON.parse(data);
                         // Iterate through the terms name to check if it matches `req.params.id`
-                        for (let i = 0; i < db.length; i++) {
-                            if (noteId === db[i].id) {
-                            return res.json(db[i]);
-                            }
-                        }        
+                            for (let i = 0; i < db.length; i++) {
+                                if (noteId === db[i].id) {
+                                return res.json(db[i]);
+                                }
+                            }        
                         // Return a message if the term doesn't exist in our DB
-                        return res.json('No match found');
-
-
-                    // const note = notes.find(n => n.id === noteId);
-                    // if (note) {
-                    //     res.json(note);
-                    // } else {
-                    //     res.status(404).json('Note not found');
-                    // }
+                            return res.json('No match found');
                 }
             });
         });
     
         
-    // POST -  To add notes --------------------------------
+    //POST -  To add notes --------------------------------
 
         app.post('/api/notes', (req, res) => {
             // Log that a POST request was received
@@ -98,53 +89,58 @@
                 const { title, text } = req.body;
         
             // If all the required properties are present
-            // if (title && text) {
+                // if (title && text) // && or || ?
                 if (title || text) {    
-                // Variable for the object we will save
-                const newNotes = {
-                    title,
-                    text,
-                    id: uuid(),
-                };
-        
-                // TO READ AND WRITE TO db.json
+                    // Variable for the object we will save
+                        const newNotes = {
+                            title,
+                            text,
+                            id: uuid(),
+                        };
+            
+                    // TO READ AND WRITE TO db.json
 
-                    //1. Read the reviews.json and parse the data
-                    fs.readFile('./db/db.json', 'utf-8', (err, data) => {
-                        const notes = JSON.parse(data);
-                        
-                        // 2. add the new review to the list of reviews
-                            notes.push(newNotes);
-                            console.log(notes); 
+                        //1. Read the reviews.json and parse the data
+                            fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+                                const notes = JSON.parse(data);
                                 
-                        // 3. stringify the list of reviews
-                            const reviewNotes = JSON.stringify(notes, null, '\t');
-                
-                        // 4. write the updated list to the reviews.json
-                
-                            fs.writeFile(`./db/db.json`, reviewNotes, (err) =>
-                                err
-                                ? console.error(err)
-                                : console.log(
-                                    `Review for ${newNotes.title} has been written to JSON file`
-                                    )
-                            );
-                    })
+                                // 2. add the new review to the list of reviews
+                                    notes.push(newNotes);
+                                    console.log(notes); 
+                                        
+                                // 3. stringify the list of reviews
+                                    const reviewNotes = JSON.stringify(notes, null, '\t');
+                        
+                                // 4. write the updated list to the reviews.json
+                        
+                                    fs.writeFile(`./db/db.json`, reviewNotes, (err) =>
+                                        err
+                                        ? console.error(err)
+                                        : console.log(
+                                            `Review for ${newNotes.title} has been written to JSON file`
+                                            )
+                                    );
+                            })
+                    
+                        // Terminal visuals 
+                            const response = {
+                                status: 'success',
+                                body: newNotes,
+                            };
+                            console.log(response);
+                            res.status(201).json(response);
 
-                const response = {
-                    status: 'success',
-                    body: newNotes,
-                };
-                
-                console.log(response);
-                res.status(201).json(response);
-            } else {
-            res.status(500).json('Error in posting review');
-            }
+                } else {
+                res.status(500).json('Error in posting review');
+                }
         });
+    
+        
+    //DELETE - delete note
+        //
         
 
-    // GET - Fallback Route ---------------------------------
+    //GET - Fallback Route ---------------------------------
         app.get('*', (req, res) => {
             res.sendFile(path.join(__dirname, 'public/404.html'))
         });
