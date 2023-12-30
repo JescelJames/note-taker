@@ -1,6 +1,4 @@
 [
-
-
 	{
 		"title": "Feed the ducks",
 		"text": "I cannot miss this todo list.",
@@ -29,5 +27,10 @@
 		"title": "BLOBBI",
 		"text": "Is cool!",
 		"id": "8d00"
+	},
+	{
+		"title": "NEW YEARS RESOLUTION",
+		"text": "Learn to relax",
+		"id": "d7e9"
 	}
 ]
