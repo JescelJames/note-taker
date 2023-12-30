@@ -48,26 +48,49 @@
             // Log our request to the terminal
             console.info(`${req.method} request received in terminal. jcv`);
 
-            // // Show the user agent information in the terminal
-            // console.info(req.rawHeaders);
-
+          
+            // Sending all db to the client
             return res.json(db);
+
         });
 
         // app.get('/api/terms', (req, res) => res.json(termData));
 
-    // POST -     
+
+
+    // POST request to add notes ------------------------
+
         app.post('/api/notes', (req, res) => { 
-            console.info(`${req.method} request received in terminal. jcv`)
-            return res.json(db)
+            // Log that a POST request was received
+            console.info(`${req.method} request received in terminal. jcv`);
+
+            
+            let responseToUser;
+
+            // Check if there is anything in the responseToUser body
+            if (req.body && req.body.title) {
+
+              responseToUser = {
+                status: 'success',
+                data: req.body,
+              };
+
+              res.json(`Review for ${responseToUser.data.title} has been added!`);
+
+            } else {
+              res.json('Request body must at least contain a title');
+
+            }
+      
+            // Log the responseToUser body to the console
+            console.log(req.body);
+            
+
         });
 
 
 
-
-
-        
-    // GET - fallback route ---------------------------------
+    // GET - Fallback Route ---------------------------------
         app.get('*', (req, res) => {
             res.sendFile(path.join(__dirname, 'public/404.html'))
         });
