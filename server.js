@@ -3,7 +3,8 @@
     const express = require('express');
     const path =  require('path');
     const db = require('./db/db.json');
-    console.log(db);
+    const fs = require('fs');
+    
 
 
 // DATA ___________________________________________________
@@ -65,27 +66,45 @@
             console.info(`${req.method} request received in terminal. jcv`);
 
             
-            let responseToUser;
-
+            const { title, text } = req.body;
+            
             // Check if there is anything in the responseToUser body
-            if (req.body && req.body.title) {
+            if (title && text) {
 
-              responseToUser = {
-                status: 'success',
-                data: req.body,
+              const newNote = {
+
+                title,
+                text,
+                
               };
 
-              res.json(`Review for ${responseToUser.data.title} has been added!`);
+            const reviewNote = JSON.stringify(newNote);
 
-            } else {
-              res.json('Request body must at least contain a title');
+        // Write the string to a file
+        fs.writeFile(`./db/${newNote.title}.json`, reviewNote, (err) =>
+          err
+            ? console.error(err)
+            : console.log(
+                `Review for ${newNote.title} has been written to JSON file`
+              )
+        );
 
-            }
+        const response = {
+          status: 'success',
+          body: newNote,
+        };
+
+        console.log(response);
+        res.status(201).json(response);
+      } else {
+        res.status(500).json('Error in posting review');
+      }
+      
       
             // Log the responseToUser body to the console
             console.log(req.body);
             
-
+            
         });
 
 
