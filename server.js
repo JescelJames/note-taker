@@ -122,13 +122,13 @@
                                     );
                             })
                     
-                        // Terminal visuals 
-                            const response = {
-                                status: 'success',
-                                body: newNotes,
-                            };
-                            console.log(response);
-                            res.status(201).json(response);
+                    // Terminal visuals 
+                        const response = {
+                            status: 'success',
+                            body: newNotes,
+                        };
+                        console.log(response);
+                        res.status(201).json(response);
 
                 } else {
                 res.status(500).json('Error in posting review');
@@ -137,8 +137,51 @@
     
         
     //DELETE - delete note
-        //
         
+        app.delete('api/notes/:id', (req, res) => {
+            const noteId = req.params.id;
+        
+            //Read all notes from the db.json file
+                fs.readFile('./db/db.json', 'utf8', (err, data) => {
+                    if (err) {
+                        console.error(err);
+                        return res.status(500).json('Error reading data');
+                    }
+
+                    //remove the note with the given id property
+                    let notes = JSON.parse(data);
+                    notes = notes.filter(note => note.id !== noteId);
+
+
+
+
+
+
+                    // const notes = JSON.parse(data);
+                    // let found = false;
+
+                    // for(let i = 0; i < notes.length; i++) {
+                    //     if (notes[i].id === noteId) {
+                    //         notes.splice(i, 1); // Remove the note at index i
+                    //         // found = true;
+                    //         break; // Exit the loop once the note is found and removed
+                    //     }
+                    // }
+                    fs.writeFile('./db/db.json', JSON.stringify(notes, null,'\t'), (err) => {
+                        if (err) {
+                            console.error(err);
+                            return res.status(500).json('Error writing data');
+                        }
+                        
+                        res.json(`Note with id ${noteId} has been deleted`)
+
+                    })
+
+
+
+                })
+            
+        })
 
     //GET - Fallback Route ---------------------------------
         app.get('*', (req, res) => {
