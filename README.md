@@ -18,8 +18,10 @@ This challenge helps the user create a note taker using Express.js. The applicat
 
 ### Photo
 
+![note-taker-index](https://github.com/JescelJames/note-taker/assets/105643185/0e3a8c03-bf03-4c23-b85f-7f058795869c)
 
 
+![note-taker-notes](https://github.com/JescelJames/note-taker/assets/105643185/9d1e2561-e8af-4070-a7d8-88c843f45085)
 
 
 
