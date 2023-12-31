@@ -35,11 +35,13 @@
             return res.sendFile(path.join(__dirname, '/public/index.html'))
         });
 
+
     //GET - notes.html -------------------------------------
 
         app.get('/notes', (req, res) => {
             res.sendFile(path.join(__dirname, 'public/notes.html'))
         });
+
 
     //GET - api notes  -------------------------------------
 
@@ -66,14 +68,14 @@
                     res.status(500).json('Error reading data');
                 } 
                 else {
-                        // Iterate through the terms name to check if it matches `req.params.id`
-                            for (let i = 0; i < db.length; i++) {
-                                if (noteId === db[i].id) {
-                                return res.json(db[i]);
-                                }
-                            }        
-                        // Return a message if the term doesn't exist in our DB
-                            return res.json('No match found');
+                    // Iterate through the terms name to check if it matches `req.params.id`
+                        for (let i = 0; i < db.length; i++) {
+                            if (noteId === db[i].id) {
+                            return res.json(db[i]);
+                            }
+                        }        
+                    // Return a message if the term doesn't exist in our DB
+                        return res.json('No match found');
                 }
             });
         });

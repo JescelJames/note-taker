@@ -1,36 +1,23 @@
-# My Challenge: Create a Logo Generator with SVG
+# My Challenge: Create an Express.js Note Taker
 
 ## Description
-This challenge helps the user create a simple logo using Node.js command-line application that takes in user input to generate a logo and save it as an SVG. The application prompts the user to select a color and shape, provide text for the logo, and save the generated SVG to a `.svg` file.
+This challenge helps the user create a note taker using Express.js. The application prompts the user to add and view notes.
 
 
-### This is a Node js challenge: To help the user generate a simple logo using command line. 
+### This is a Express.js challenge: To have a note taking app the user can utilize.
 
-- My motivation:  To build a simple log using user input from command-line
-- Why I took this challege: To learn to create an SVG file using prompts from command-line.
-- What the challenge solved:  The user can create a simple SVG file from prompts from command-line. 
+- My motivation:  To create an app utilizing Express.js.
+- Why I took this challege: To learn how Express.js server work.
+- What the challenge solved:  The app is a simple note taker using Express.js to process user request. 
 
-- Repository Link: https://github.com/JescelJames/svg-logo-maker
+- Repository Link: https://github.com/JescelJames/note-taker
 
-- Deployed Link: https://jesceljames.github.io/svg-logo-maker/
-
-- Video Demonstration: https://drive.google.com/file/d/1SXiG7aL2OWJx2iB6PMPH-uKd87j7PX53/view
-
-### Video and Photos
-[svg_logo.webm](https://github.com/JescelJames/svg-logo-maker/assets/105643185/8a1e60ba-76b7-43f7-b263-834738c56830)
+- Deployed Link Heroku: https://note-taker-00-7c68737cdaac.herokuapp.com/
 
 
-![tests_pass](https://github.com/JescelJames/svg-logo-maker/assets/105643185/41a83121-3fc6-4421-9906-a9c5dd57d311)
 
-![node_index](https://github.com/JescelJames/svg-logo-maker/assets/105643185/fcf8cdc6-e0ee-491b-8eb5-97e9a645f73d)
+### Photo
 
-![svg_logo_svg](https://github.com/JescelJames/svg-logo-maker/assets/105643185/9ea85753-266d-43c7-abd0-a1acf7ab3613)
-
-![svg_logo_abc](https://github.com/JescelJames/svg-logo-maker/assets/105643185/974d5105-1357-463a-8d44-01e55f76569a)
-
-![svg_log_def](https://github.com/JescelJames/svg-logo-maker/assets/105643185/1342ab8d-acf9-41f0-9fb4-65fa2eae1e44)
-
-![svg_logo_hij](https://github.com/JescelJames/svg-logo-maker/assets/105643185/1209f572-0978-4c28-872b-e3224b55b27d)
 
 
 
@@ -38,11 +25,11 @@ This challenge helps the user create a simple logo using Node.js command-line ap
 
 ### What I learned:  
 
-1. To add, commit often. I had to redo my index because I would not push up to github. This created rework and added time to the workload.
-2. Testing a js file, doing test that runs as the changes happen in file.
-3. To right-click on the index and open the terminal to properly run the node index.
-4. That SVG and HTML are both based on XML.
-5. That if I start small on testing, it becomes much faster.
+1. Organization in code makes it easier for me to read through.  The headers make it easy to navigate.
+2. That to add to a data to json, data must be read, pushed, stringify, then write.   
+3. Heroku app creation and deployment.
+4. Using Insomnia Core to process server request.
+5. That const PORT = process.env.PORT || 3000 essentially creates a fallback to run the server.
 6. That once I make change in my code, run it, then add/commit.  This seems to help me map in my head where I am at. Small chunking helps me a lot more than adding more lines of code before committing.
 7. To write the code in big picture first, before diving in.
 8. Psuedocoding helps, but I need more practice on it.  I understand the value, but I struggle to implement it.
