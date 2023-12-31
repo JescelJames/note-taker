@@ -94,7 +94,7 @@
             
                     // TO READ AND WRITE TO db.json
                                 //1. Read the reviews.json and parse the data
-                                 fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+                                fs.readFile('./db/db.json', 'utf-8', (err, data) => {
                                     const notes = JSON.parse(data);
                                 
                                 // 2. add the new review to the list of reviews
@@ -110,7 +110,7 @@
                                         ? console.error(err)
                                         : console.log(`Review for ${newNotes.title} has been written to JSON file`)
                                     );
-                                 })
+                                });
                     
                     // Terminal visuals 
                         const response = {
@@ -151,6 +151,8 @@
                     //         break; // Exit the loop once the note is found and removed
                     //     }
                     // }
+
+                    // Write to db.json the remaining notes after deletion.
                     fs.writeFile('./db/db.json', JSON.stringify(notes, null,'\t'), (err) => {
                         if (err) {
                             console.error(err);
