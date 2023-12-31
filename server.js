@@ -114,13 +114,10 @@
                                     const reviewNotes = JSON.stringify(notes, null, '\t');
                         
                                 // 4. write the updated list to the reviews.json
-                        
                                     fs.writeFile(`./db/db.json`, reviewNotes, (err) =>
                                         err
                                         ? console.error(err)
-                                        : console.log(
-                                            `Review for ${newNotes.title} has been written to JSON file`
-                                            )
+                                        : console.log(`Review for ${newNotes.title} has been written to JSON file`)
                                     );
                             })
                     
