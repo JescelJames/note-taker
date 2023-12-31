@@ -10,13 +10,15 @@ This challenge helps the user create a note taker using Express.js. The applicat
 - Why I took this challege: To learn how Express.js server work.
 - What the challenge solved:  The app is a simple note taker using Express.js to process user request. 
 
+### Links to the application.
+
 - Repository Link: https://github.com/JescelJames/note-taker
 
 - Deployed Link Heroku: https://note-taker-00-7c68737cdaac.herokuapp.com/
 
 
 
-### Photo
+### Photos
 
 ![note-taker-index](https://github.com/JescelJames/note-taker/assets/105643185/0e3a8c03-bf03-4c23-b85f-7f058795869c)
 
@@ -67,18 +69,14 @@ Prerequisites:
 #### My Classmates
 - Who are smarter than me, and willing to help at all times.
 
-
-
-
-
 #### Express.js docs
 
-https://expressjs.com/en/4x/api.html#app.delete.method
-https://expressjs.com/en/guide/routing.html
-https://expressjs.com/en/4x/api.html
+- https://expressjs.com/en/4x/api.html#app.delete.method
+- https://expressjs.com/en/guide/routing.html
+- https://expressjs.com/en/4x/api.html
 
 #### Music while coding:
-https://www.youtube.com/watch?v=tkgmYIsflSU&ab_channel=ChillMusicLab
+- https://www.youtube.com/watch?v=tkgmYIsflSU&ab_channel=ChillMusicLab
 
 
 ## Contact
