@@ -7,25 +7,21 @@
     // Helper method for generating unique ids
     const uuid = require('./helpers/uuid');
     
-
 // DATA ___________________________________________________
     //
-
-
+    
 // APP/PORT ________________________________________________
 
     const app = express();
     const PORT = process.env.PORT || 3000;
 
-
 // MIDDLEWARES ______________________________________________
 
-    // static assets
-    app.use(express.static('public'));
-    // stuff to get the req.body
+    // To get the req.body
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
-
+    // static assets
+    app.use(express.static('public'));
 
 // ROUTES ____________________________________________________
 
@@ -35,13 +31,11 @@
             return res.sendFile(path.join(__dirname, '/public/index.html'))
         });
 
-
     //GET - notes.html -------------------------------------
 
         app.get('/notes', (req, res) => {
             res.sendFile(path.join(__dirname, 'public/notes.html'))
         });
-
 
     //GET - api notes  -------------------------------------
 
@@ -55,7 +49,6 @@
                 }
             });
         });
-
 
     //GET - api note by id  ----------------------------------
 
@@ -79,9 +72,8 @@
                 }
             });
         });
-    
         
-    //POST -  To add notes --------------------------------
+    //POST - To add notes --------------------------------
 
         app.post('/api/notes', (req, res) => {
             // Log that a POST request was received
@@ -101,10 +93,9 @@
                         };
             
                     // TO READ AND WRITE TO db.json
-
-                        //1. Read the reviews.json and parse the data
-                            fs.readFile('./db/db.json', 'utf-8', (err, data) => {
-                                const notes = JSON.parse(data);
+                                //1. Read the reviews.json and parse the data
+                                 fs.readFile('./db/db.json', 'utf-8', (err, data) => {
+                                    const notes = JSON.parse(data);
                                 
                                 // 2. add the new review to the list of reviews
                                     notes.push(newNotes);
@@ -119,7 +110,7 @@
                                         ? console.error(err)
                                         : console.log(`Review for ${newNotes.title} has been written to JSON file`)
                                     );
-                            })
+                                 })
                     
                     // Terminal visuals 
                         const response = {
@@ -133,9 +124,8 @@
                 res.status(500).json('Error in posting review');
                 }
         });
-    
         
-    //DELETE - delete note
+    //DELETE -UNDER CONSTRUCTION ______________________________________________
         
         app.delete('api/notes/:id', (req, res) => {
             const noteId = req.params.id;
@@ -150,11 +140,6 @@
                     //remove the note with the given id property
                     let notes = JSON.parse(data);
                     notes = notes.filter(note => note.id !== noteId);
-
-
-
-
-
 
                     // const notes = JSON.parse(data);
                     // let found = false;
@@ -175,18 +160,15 @@
                         res.json(`Note with id ${noteId} has been deleted`)
 
                     })
-
-
-
                 })
-            
         })
+    
+    // _______________________________________________________________________
 
     //GET - Fallback Route ---------------------------------
         app.get('*', (req, res) => {
             res.sendFile(path.join(__dirname, 'public/404.html'))
         });
-
 
 // START SERVER ______________________________________________
 
