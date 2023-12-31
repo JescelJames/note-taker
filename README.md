@@ -30,12 +30,12 @@ This challenge helps the user create a note taker using Express.js. The applicat
 3. Heroku app creation and deployment.
 4. Using Insomnia Core to process server request.
 5. That const PORT = process.env.PORT || 3000 essentially creates a fallback to run the server.
-6. That once I make change in my code, run it, then add/commit.  This seems to help me map in my head where I am at. Small chunking helps me a lot more than adding more lines of code before committing.
-7. To write the code in big picture first, before diving in.
-8. Psuedocoding helps, but I need more practice on it.  I understand the value, but I struggle to implement it.
+6. .get and .post methods
+7. Fallback routes is helpful for users.  
+8. That InsomniaCore cannot do the same behavior as the browser and vice versa.
 
 ## Code Description
-This code can be accessed in terminal by running index.js file. type: node index.js in terminal and prompts will appear to create a logo.svg file.  Run the logo.svg file in browser to see the result.
+This code can be accessed in terminal by typing: node server in terminal. 
 
 
 ## Installation Instructions
@@ -43,14 +43,14 @@ This code can be accessed in terminal by running index.js file. type: node index
 Prerequisites:  
  - Node.js. Download Node.js at https://nodejs.org/en
 
- - npmjs.com inquirer package:  https://www.npmjs.com/package//inquirer
+ - Express.js https://expressjs.com/
 
- - jestjs.io:  https://jestjs.io/
+ 
 
  ## Usage
 1. Command-line instructions:
 
-        node index.js
+        node server.js
 
 
 ## Credits
@@ -65,16 +65,15 @@ Prerequisites:
 #### My Classmates
 - Who are smarter than me, and willing to help at all times.
 
-#### Npm Inquirer
-https://www.npmjs.com/package/inquirer
 
-#### Jestjs.io
-https://jestjs.io/
 
-#### MDG SVG Docs
 
-https://developer.mozilla.org/en-US/docs/Web/SVG
 
+#### Express.js docs
+
+https://expressjs.com/en/4x/api.html#app.delete.method
+https://expressjs.com/en/guide/routing.html
+https://expressjs.com/en/4x/api.html
 
 #### Music while coding:
 https://www.youtube.com/watch?v=tkgmYIsflSU&ab_channel=ChillMusicLab
@@ -86,4 +85,4 @@ For any additional questions about this project, contact me at:
 - Github: https://github.com/jesceljames
 
 
-https://expressjs.com/en/4x/api.html#app.delete.method
+
