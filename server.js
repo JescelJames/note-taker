@@ -127,7 +127,7 @@
         
     //DELETE -UNDER CONSTRUCTION ______________________________________________
         
-        app.delete('api/notes/:id', (req, res) => {
+        app.delete('/api/notes/:id', (req, res) => {
             const noteId = req.params.id;
         
             //Read all notes from the db.json file
