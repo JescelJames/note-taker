@@ -1,7 +1,7 @@
 # My Challenge: Create an Express.js Note Taker
 
 ## Description
-This challenge helps the user create a note taker using Express.js. The application prompts the user to add and view notes.
+This challenge helps the user create a note taker using Express.js. The application prompts the user to add, view, and delete notes.
 
 
 ### This is a Express.js challenge: To have a note taking app the user can utilize.
@@ -39,7 +39,7 @@ This challenge helps the user create a note taker using Express.js. The applicat
 8. That InsomniaCore cannot do the same behavior as the browser and vice versa.
 
 ## Code Description
-This code can be accessed in terminal by typing: node server in terminal. 
+This code can be accessed in terminal by typing in terminal: node server  
 
 
 ## Installation Instructions
