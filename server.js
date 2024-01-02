@@ -127,7 +127,7 @@
         
     //DELETE -UNDER CONSTRUCTION ______________________________________________
         
-        app.delete('api/notes/:id', (req, res) => {
+        app.delete('/api/notes/:id', (req, res) => {
             const noteId = req.params.id;
         
             //Read all notes from the db.json file
@@ -141,16 +141,17 @@
                     let notes = JSON.parse(data);
                     notes = notes.filter(note => note.id !== noteId);
 
-                    // const notes = JSON.parse(data);
-                    // let found = false;
+                    //ALTERNATIVE CODE --
+                        // const notes = JSON.parse(data);
+                        // let found = false;
 
-                    // for(let i = 0; i < notes.length; i++) {
-                    //     if (notes[i].id === noteId) {
-                    //         notes.splice(i, 1); // Remove the note at index i
-                    //         // found = true;
-                    //         break; // Exit the loop once the note is found and removed
-                    //     }
-                    // }
+                        // for(let i = 0; i < notes.length; i++) {
+                        //     if (notes[i].id === noteId) {
+                        //         notes.splice(i, 1); // Remove the note at index i
+                        //         // found = true;
+                        //         break; // Exit the loop once the note is found and removed
+                        //     }
+                        // }
 
                     // Write to db.json the remaining notes after deletion.
                     fs.writeFile('./db/db.json', JSON.stringify(notes, null,'\t'), (err) => {
